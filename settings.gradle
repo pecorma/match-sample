@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Match Sample"
 include ':app'
 include ':domain'
+include ':model'
