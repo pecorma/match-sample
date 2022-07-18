@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
-      <module name="Match_Sample.app" target="11" />
+    <bytecodeTargetLevel target="11">
       <module name="Match_Sample.common" target="11" />
-      <module name="Match_Sample.domain" target="11" />
       <module name="Match_Sample.model" target="11" />
       <module name="Match_Sample.networking" target="11" />
     </bytecodeTargetLevel>

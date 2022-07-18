@@ -1,11 +1,13 @@
-package com.mjpecora.app.matchsample
+package com.mjpecora.app.network.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.mjpecora.app.model.source.HomeDataSource
-import com.mjpecora.app.networking.BuildConfig.API_KEY
-import com.mjpecora.app.networking.BuildConfig.BASE_URL
-import com.mjpecora.app.networking.mapper.HomeMapper
-import com.mjpecora.app.networking.source.HomeDataSourceImpl
+import com.mjpecora.app.domain.repository.ApodRepository
+import com.mjpecora.app.domain.repository.MarsRoverRepository
+import com.mjpecora.app.network.BuildConfig.API_KEY
+import com.mjpecora.app.network.BuildConfig.BASE_URL
+import com.mjpecora.app.network.remote.NasaApi
+import com.mjpecora.app.network.repository.ApodRepositoryImpl
+import com.mjpecora.app.network.repository.MarsRoverRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -14,6 +16,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -22,13 +25,23 @@ import javax.inject.Singleton
 abstract class NetworkModule {
 
     @Binds
-    abstract fun bindHomeDataSource(dataSourceImpl: HomeDataSourceImpl): HomeDataSource
+    @Singleton
+    abstract fun apodRepository(impl: ApodRepositoryImpl): ApodRepository
+
+    @Binds
+    @Singleton
+    abstract fun marsRoverRepository(impl: MarsRoverRepositoryImpl): MarsRoverRepository
 
     companion object {
         @Provides
         @Singleton
         fun provideOkHttpClient(): OkHttpClient =
             OkHttpClient.Builder()
+                .addInterceptor(
+                    HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    }
+                )
                 .addInterceptor {
                     val originalRequest = it.request()
                     val originalUrl = originalRequest.url

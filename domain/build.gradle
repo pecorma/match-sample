@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.mjpecora.app.domain'
+
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation("com.squareup.retrofit2:retrofit:${versions.retrofit}")
+
+    implementation("androidx.compose.compiler:compiler:1.2.0")
+    implementation("androidx.compose.runtime:runtime:${versions.compose}")
+    implementation("androidx.paging:paging-compose:${versions.paging}")
+
+    /** dependency inject dependencies */
+    implementation("com.google.dagger:hilt-android:${versions.hilt}")
+    kapt("com.google.dagger:hilt-compiler:${versions.hilt}")
+
+    /** coroutines dependencies */
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}")
+}

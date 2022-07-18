@@ -1,4 +1,4 @@
-package com.mjpecora.app.matchsample
+package com.mjpecora.app.domain
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.mjpecora.app.matchsample", appContext.packageName)
+        assertEquals("com.mjpecora.app.domain.test", appContext.packageName)
     }
 }

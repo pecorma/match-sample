@@ -15,4 +15,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Match Sample"
+
 include ':app'
+include ':network'
+include ':domain'

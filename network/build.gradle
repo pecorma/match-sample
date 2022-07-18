@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+}
+
+android {
+    namespace 'com.mjpecora.app.network'
+
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("String", "API_KEY", "\"FOCiFd9EqibZngKzGnWWvhcZN4C7oeGtg6veYlJL\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.nasa.gov/\"")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+    }
+
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+dependencies {
+    implementation(project(':domain'))
+
+    /** networking dependencies */
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:${versions.okhttp}"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation("com.squareup.retrofit2:retrofit:${versions.retrofit}")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${versions.serialization}")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${versions.serializationConverter}")
+
+    /** dependency inject dependencies */
+    implementation("com.google.dagger:hilt-android:${versions.hilt}")
+    kapt("com.google.dagger:hilt-compiler:${versions.hilt}")
+
+    /** compose dependencies */
+    implementation("androidx.compose.compiler:compiler:1.2.0")
+    implementation("androidx.compose.runtime:runtime:${versions.compose}")
+    implementation("androidx.paging:paging-compose:${versions.paging}")
+}

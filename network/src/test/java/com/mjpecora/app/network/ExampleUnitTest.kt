@@ -1,4 +1,4 @@
-package com.mjpecora.app.matchsample
+package com.mjpecora.app.network
 
 import org.junit.Assert.*
 import org.junit.Test

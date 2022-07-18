@@ -30,12 +30,10 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:${versions.corektx}")
+    implementation(project(':domain'))
+    implementation(project(':network'))
 
-    implementation project(":domain")
-    implementation project(":model")
-    implementation project(":networking")
-    implementation project(":common")
+    implementation("androidx.core:core-ktx:${versions.corektx}")
 
     /** compose dependencies */
     implementation("androidx.compose.ui:ui:${versions.compose}")
@@ -47,6 +45,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:${versions.accompanist}")
     implementation("androidx.compose.compiler:compiler:1.2.0")
     implementation("androidx.compose.runtime:runtime:${versions.compose}")
+    implementation("androidx.paging:paging-compose:${versions.paging}")
 
     /** dependency inject dependencies */
     implementation("com.google.dagger:hilt-android:${versions.hilt}")
